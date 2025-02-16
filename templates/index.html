@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>最新新聞</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>最新新聞</h2>
+    <button id="fetchNews">獲取新聞</button>
+    <table>
+        <thead><tr><th>標題</th><th>來源</th><th>時間</th><th>連結</th></tr></thead>
+        <tbody id="newsTable"><tr><td colspan="4">請按按鈕抓取新聞</td></tr></tbody>
+    </table>
+    <script>
+        $("#fetchNews").click(function() {
+            $("#newsTable").html("<tr><td colspan='4'>新聞抓取中...</td></tr>");
+            $.get("/get_news", function(data) {
+                let rows = "";
+                data.forEach(news => {
+                    rows += `<tr>
+                        <td>${news['標題']}</td>
+                        <td>${news['來源']}</td>
+                        <td>${news['時間']}</td>
+                        <td><a href="${news['連結']}" target="_blank">查看新聞</a></td>
+                    </tr>`;
+                });
+                $("#newsTable").html(rows);
+            });
+        });
+    </script>
+</body>
+</html>
+
