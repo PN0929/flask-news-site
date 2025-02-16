@@ -1,5 +1,7 @@
-Flask
+flask
+gunicorn
 requests
 beautifulsoup4
-pandas
-gunicorn
+selenium
+webdriver-manager
+flask-cors
